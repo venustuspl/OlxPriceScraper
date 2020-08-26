@@ -27,6 +27,7 @@ public class OlxService {
             for (Element element : elements) {
                 eachResult = element.text();
                 eachValue = Double.valueOf(eachResult.substring(0, eachResult.length() - 3).replaceAll(" ", "").replaceAll(",", "."));
+                System.out.println(eachValue);
                 resultList.add(eachValue);
 
             }
