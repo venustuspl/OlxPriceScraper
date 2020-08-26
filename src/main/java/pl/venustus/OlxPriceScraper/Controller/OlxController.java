@@ -17,15 +17,35 @@ import java.util.List;
 public class OlxController {
 
     @GetMapping("/")
-    public List<String> getOffersCount() {
+    public Double getOffersCount() {
+        Integer eachValue;
+        String eachResult;
+        Double result = 0.00;
+        Integer listSum = 0;
+        Integer loop = 0;
         try {
-            List<String> result = new ArrayList<>();
+            List<Integer> resultList = new ArrayList<>();
             Document document = Jsoup.connect("https://www.olx.pl/nieruchomosci/mieszkania/wynajem/warszawa/?search%5Bfilter_float_m%3Afrom%5D=38&search%5Bfilter_float_m%3Ato%5D=40&search%5Bdistrict_id%5D=377").get();
             Elements elements = document.select("p.price");
             for (Element element : elements) {
-                result.add(element.text());
-                System.out.println(element.text());
+                eachResult = element.text();
+                eachValue = Integer.valueOf(eachResult.substring(0, eachResult.length() - 3).replaceAll(" ", ""));
+                resultList.add(eachValue);
+
             }
+            for (Integer values : resultList) {
+                listSum = listSum + values;
+                loop++;
+            }
+
+            System.out.println(listSum);
+            System.out.println(loop);
+            listSum = listSum - 400000;
+            System.out.println(listSum);
+            if (loop > 0) {
+                result = Double.valueOf(listSum / loop);
+            }
+
             return result;
         } catch (IOException e) {
             e.printStackTrace();
