@@ -7,7 +7,7 @@ function append(parent, el) {
 }
 
 
-const ol = document.getElementById('olxlink');
+const ol = document.getElementById('olxlink').value;
 const oar = document.getElementById('olxaverageresult');
 function getolxpriceaverage(){
     console.log(ol);
