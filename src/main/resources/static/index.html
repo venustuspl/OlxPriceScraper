@@ -1,0 +1,34 @@
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <meta charset="UTF-">
+    <title>OracleApp</title>
+    <META CONTENT="Olx, scraper" NAME="KEYWORDS">
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <meta content="origin" name="referrer">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+</head>
+
+<body style="background-color: white; background-image: url('orackle_jdk.jpg');background-repeat:no-repeat;  background-position: center; ">
+
+
+<h1 align="center" style="background-color: white;">OlxPriceScrapper</h1>
+<h2 align="center" style="background-color: white">Here you can check olx price range</h2>
+<hr>
+<h4>Enter olx link:</h4>
+<input id="olxlink" minlength="1" type="text"><br>
+<button id="procedolxlink" onclick="getolxpricedata()">Get Olx price statistic</button>
+<h4>
+    <div id="olxpriceresults"></div>
+</h4>
+
+</body>
+<script src="api.js"></script>
+</html>
