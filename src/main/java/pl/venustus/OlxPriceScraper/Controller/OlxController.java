@@ -20,10 +20,11 @@ public class OlxController {
     public List<String> getOffersCount() {
         try {
             List<String> result = new ArrayList<>();
-            Document document = Jsoup.connect("https://www.pracuj.pl/praca/junior%20java%20developer;kw/warszawa;wp").get();
-            Elements elements = document.select("a[class=offer-details__title-link]");
+            Document document = Jsoup.connect("https://www.olx.pl/nieruchomosci/mieszkania/wynajem/warszawa/?search%5Bfilter_float_m%3Afrom%5D=38&search%5Bfilter_float_m%3Ato%5D=40&search%5Bdistrict_id%5D=377").get();
+            Elements elements = document.select("p.price");
             for (Element element : elements) {
-                result.add(element.ownText() + " - " + "https://pracuj.pl" + element.attr("href"));
+                result.add(element.text());
+                System.out.println(element.text());
             }
             return result;
         } catch (IOException e) {
