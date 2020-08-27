@@ -8,18 +8,23 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OlxService {
 
-    public Double getOlxAveragePrice(String olxlink) {
+    public Map<String, Double> getOlxPriceDetails(String olxlink) {
         Double eachValue;
         String eachResult;
-        Double result = 0.00;
+        Double average = 0.00;
         double listSum = 0;
         Integer loop = 0;
-        List<Double> resultList = new ArrayList<>();
+        Double maxValue = 0.00;
+        Double minValue = 0.00;
+        List<Double> valuesList = new ArrayList<>();
+        Map<String, Double> resultMap = new HashMap<>();
         try {
 
             Document document = Jsoup.connect(olxlink).get();
@@ -28,23 +33,35 @@ public class OlxService {
                 eachResult = element.text();
                 eachValue = Double.valueOf(eachResult.substring(0, eachResult.length() - 3).replaceAll(" ", "").replaceAll(",", "."));
                 System.out.println(eachValue);
-                resultList.add(eachValue);
+                valuesList.add(eachValue);
 
             }
-            for (Double values : resultList) {
-                listSum = listSum + values;
+            for (Double value : valuesList) {
+                listSum = listSum + value;
                 loop++;
+                if (value > maxValue) {
+                    maxValue = value;
+                }
+                if (value < minValue) {
+                    minValue = value;
+                }
+
             }
+            if (loop > 0) {
+                average = Double.valueOf(listSum / loop);
+            }
+            resultMap.put("Sum: ", listSum);
+            resultMap.put("Number items: ", Double.valueOf(loop));
+            resultMap.put("Average price: ", average);
+            resultMap.put("Max value: ", maxValue);
+            resultMap.put("Min value: ", minValue);
 
             System.out.println(listSum);
             System.out.println(loop);
-            //listSum = listSum - 400000;
             System.out.println(listSum);
-            if (loop > 0) {
-                result = Double.valueOf(listSum / loop);
-            }
 
-            return result;
+
+            return resultMap;
         } catch (IOException e) {
             e.printStackTrace();
         }

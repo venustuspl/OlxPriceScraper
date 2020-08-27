@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.venustus.OlxPriceScraper.Service.OlxService;
 
+import java.util.Map;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/")
@@ -13,8 +15,8 @@ public class OlxController {
     private OlxService olxService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/getolxaverageprice")
-    public Double getOlxAveragePrice(@RequestParam("olxlink") String olxlink) {
-        return olxService.getOlxAveragePrice(olxlink);
+    public Map<String, Double> getOlxPriceDetails(@RequestParam("olxlink") String olxlink) {
+        return olxService.getOlxPriceDetails(olxlink);
     }
 
 }

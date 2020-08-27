@@ -9,9 +9,9 @@ function append(parent, el) {
 
 function getolxpriceaverage(){
 const ol = document.getElementById('olxlink').value;
-const oar = document.getElementById('olxaverageresult');
+const oar = document.getElementById('olxpricedetailsresult');
     console.log(ol);
-    var querylink = '/getolxaverageprice?olxlink=' + ol;
+    var querylink = '/getolxpricedetails?olxlink=' + ol;
     console.log(querylink);
 
 fetch(querylink)
