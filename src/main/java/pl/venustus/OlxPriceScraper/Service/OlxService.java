@@ -27,14 +27,21 @@ public class OlxService {
         Map<String, Double> resultMap = new HashMap<>();
         try {
 
-            Document document = Jsoup.connect(olxlink).get();
+            Document document = Jsoup.connect(olxlink)
+                    .followRedirects(true)
+                    .get();
+            //System.out.println(document);
             Elements elements = document.select("p.price");
             for (Element element : elements) {
                 eachResult = element.text();
+                System.out.println(element.ownText());
                 eachValue = Double.valueOf(eachResult.substring(0, eachResult.length() - 3).replaceAll(" ", "").replaceAll(",", "."));
                 System.out.println(eachValue);
                 valuesList.add(eachValue);
 
+            }
+            if (!valuesList.isEmpty()) {
+                minValue = valuesList.get(0);
             }
             for (Double value : valuesList) {
                 listSum = listSum + value;
@@ -47,8 +54,9 @@ public class OlxService {
                 }
 
             }
+            listSum = listSum - minValue - maxValue;
             if (loop > 0) {
-                average = Double.valueOf(listSum / loop);
+                average = Double.valueOf(listSum / (loop - 2));
             }
             resultMap.put("Sum: ", listSum);
             resultMap.put("Number items: ", Double.valueOf(loop));
@@ -56,9 +64,9 @@ public class OlxService {
             resultMap.put("Max value: ", maxValue);
             resultMap.put("Min value: ", minValue);
 
-            System.out.println(listSum);
-            System.out.println(loop);
-            System.out.println(listSum);
+            for (Map.Entry<String, Double> entry : resultMap.entrySet()) {
+                System.out.println(entry.getKey() + " " + entry.getValue());
+            }
 
 
             return resultMap;

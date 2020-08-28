@@ -14,7 +14,7 @@ public class OlxController {
     @Autowired
     private OlxService olxService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getolxaverageprice")
+    @RequestMapping(method = RequestMethod.GET, value = "/getolxpricedetails")
     public Map<String, Double> getOlxPriceDetails(@RequestParam("olxlink") String olxlink) {
         return olxService.getOlxPriceDetails(olxlink);
     }
