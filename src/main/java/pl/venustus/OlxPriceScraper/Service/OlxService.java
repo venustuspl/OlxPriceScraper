@@ -57,6 +57,9 @@ public class OlxService {
             listSum = listSum - minValue - maxValue;
             if (loop > 0) {
                 average = Double.valueOf(listSum / (loop - 2));
+                average = Double.valueOf(Math.round(average / 100));
+                average = Double.valueOf(Math.round(average * 100));
+
             }
             resultMap.put("Sum: ", listSum);
             resultMap.put("Number items: ", Double.valueOf(loop));
