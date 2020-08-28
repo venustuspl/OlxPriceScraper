@@ -5,6 +5,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import pl.venustus.OlxPriceScraper.Domain.OlxStatistics;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Service
 public class OlxService {
 
-    public Map<String, Double> getOlxPriceDetails(String olxlink) {
+    public OlxStatistics getOlxPriceDetails(String olxlink) {
         Double eachValue;
         String eachResult;
         Double average = 0.00;
@@ -61,18 +62,20 @@ public class OlxService {
                 average = Double.valueOf(Math.round(average * 100));
 
             }
+
+            OlxStatistics olxStatistics = new OlxStatistics(olxlink, listSum, loop, average, minValue, maxValue);
             resultMap.put("Sum: ", listSum);
             resultMap.put("Number items: ", Double.valueOf(loop));
             resultMap.put("Average price: ", average);
-            resultMap.put("Max value: ", maxValue);
             resultMap.put("Min value: ", minValue);
+            resultMap.put("Max value: ", maxValue);
 
             for (Map.Entry<String, Double> entry : resultMap.entrySet()) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
 
 
-            return resultMap;
+            return olxStatistics;
         } catch (IOException e) {
             e.printStackTrace();
         }
