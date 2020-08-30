@@ -66,7 +66,7 @@ public class OlxService {
             if (loop % 2 == 0) {
                 median = valuesList.get(Integer.valueOf(loop / 2));
             } else {
-                median = valuesList(Integer.valueOf(Integer.valueOf(loop / 2) + 1);
+                median = valuesList.get(Integer.valueOf(loop / 2) + 1);
             }
 
 
