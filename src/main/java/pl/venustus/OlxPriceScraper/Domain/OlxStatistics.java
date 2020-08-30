@@ -8,14 +8,17 @@ public class OlxStatistics {
     private Double average;
     private Double minValue;
     private Double maxValue;
+    private Double median;
 
-    public OlxStatistics(String url, Double sum, Integer countItem, Double average, Double minValue, Double maxValue) {
+
+    public OlxStatistics(String url, Double sum, Integer countItem, Double average, Double minValue, Double maxValue, Double median) {
         this.url = url;
         this.sum = sum;
         this.countItem = countItem;
         this.average = average;
         this.minValue = minValue;
         this.maxValue = maxValue;
+        this.median = median;
     }
 
     public String getUrl() {
@@ -66,15 +69,24 @@ public class OlxStatistics {
         this.maxValue = maxValue;
     }
 
+    public Double getMedian() {
+        return median;
+    }
+
+    public void setMedian(Double median) {
+        this.median = median;
+    }
+
     @Override
     public String toString() {
         return "OlxStatistics{" +
-                "url='" + url + '\'' +
-                ", sum=" + sum +
-                ", countItem=" + countItem +
-                ", average=" + average +
-                ", minValue=" + minValue +
-                ", maxValue=" + maxValue +
+                "url ='" + url + '\'' +
+                ", /n sum =" + sum +
+                ", countItem =" + countItem +
+                ", averag = " + average +
+                ", minValue = " + minValue +
+                ", maxValue = " + maxValue +
+                ", median = " + median +
                 '}';
     }
 }

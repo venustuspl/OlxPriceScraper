@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import pl.venustus.OlxPriceScraper.Domain.OlxStatistics;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class OlxService {
@@ -24,6 +21,8 @@ public class OlxService {
         Integer loop = 0;
         Double maxValue = 0.00;
         Double minValue = 0.00;
+        Double median = 0.00;
+
         List<Double> valuesList = new ArrayList<>();
         Map<String, Double> resultMap = new HashMap<>();
         try {
@@ -63,12 +62,21 @@ public class OlxService {
 
             }
 
-            OlxStatistics olxStatistics = new OlxStatistics(olxlink, listSum, loop, average, minValue, maxValue);
+            Collections.sort(valuesList);
+            if (loop % 2 == 0) {
+                median = valuesList.get(Integer.valueOf(loop / 2));
+            } else {
+                median = valuesList(Integer.valueOf(Integer.valueOf(loop / 2) + 1);
+            }
+
+
+            OlxStatistics olxStatistics = new OlxStatistics(olxlink, listSum, loop, average, minValue, maxValue, median);
             resultMap.put("Sum: ", listSum);
             resultMap.put("Number items: ", Double.valueOf(loop));
             resultMap.put("Average price: ", average);
             resultMap.put("Min value: ", minValue);
             resultMap.put("Max value: ", maxValue);
+            resultMap.put("Median: ", median);
 
             for (Map.Entry<String, Double> entry : resultMap.entrySet()) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
