@@ -1,9 +1,8 @@
 package pl.venustus.OlxPriceScraper.Service;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.venustus.OlxPriceScraper.Domain.OlxStatistics;
 
@@ -12,6 +11,9 @@ import java.util.*;
 
 @Service
 public class OlxService {
+
+    @Autowired
+    OlxConnection olxConnection;
 
     public OlxStatistics getOlxPriceDetails(String olxlink) {
         Double eachValue;
@@ -26,12 +28,7 @@ public class OlxService {
         List<Double> valuesList = new ArrayList<>();
         Map<String, Double> resultMap = new HashMap<>();
         try {
-
-            Document document = Jsoup.connect(olxlink)
-                    .followRedirects(true)
-                    .get();
-            //System.out.println(document);
-            Elements elements = document.select("p.price");
+            Elements elements = olxConnection.getHtmlElemnts(olxlink);
             for (Element element : elements) {
                 eachResult = element.text();
                 System.out.println(element.ownText());
