@@ -1,7 +1,5 @@
 package pl.venustus.OlxPriceScraper.Service;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +29,13 @@ public class OlxService {
         Map<String, Double> resultMap = new HashMap<>();
         try {
 
-            Document document = Jsoup.connect(olxlink)
-                    .followRedirects(true)
-                    .get();
-            //System.out.println(document);
-            Elements elements = document.select("p.price");
+//            Document document = Jsoup.connect(olxlink)
+//                    .followRedirects(true)
+//                    .get();
+//            Elements elements = document.select("p.price");
 
 
-            //Elements elements = olxConnection.getHtmlElemnts(olxlink);
+            Elements elements = olxConnection.getHtmlElemnts(olxlink);
             for (Element element : elements) {
                 eachResult = element.text();
                 System.out.println(element.ownText());
@@ -67,16 +64,15 @@ public class OlxService {
                 average = Double.valueOf(Math.round(average / 100));
                 average = Double.valueOf(Math.round(average * 100));
 
+
+                Collections.sort(valuesList);
+                if (loop % 2 == 0) {
+                    median = ((valuesList.get(Integer.valueOf(loop / 2)) + valuesList.get(Integer.valueOf(loop / 2) + 1)) / 2);
+                } else {
+                    median = valuesList.get(Integer.valueOf(loop / 2) + 1);
+                }
+
             }
-
-            Collections.sort(valuesList);
-            if (loop % 2 == 0) {
-                median = ((valuesList.get(Integer.valueOf(loop / 2)) + valuesList.get(Integer.valueOf(loop / 2) + 1)) / 2);
-            } else {
-                median = valuesList.get(Integer.valueOf(loop / 2) + 1);
-            }
-
-
             OlxStatistics olxStatistics = new OlxStatistics(olxlink, listSum, loop, average, minValue, maxValue, median);
             resultMap.put("Sum: ", listSum);
             resultMap.put("Number items: ", Double.valueOf(loop));
