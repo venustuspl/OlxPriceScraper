@@ -27,15 +27,19 @@ public class OlxService {
 
         List<Double> valuesList = new ArrayList<>();
         Map<String, Double> resultMap = new HashMap<>();
+        System.out.println("Stage 1");
         try {
 
 //            Document document = Jsoup.connect(olxlink)
 //                    .followRedirects(true)
 //                    .get();
 //            Elements elements = document.select("p.price");
-
+            System.out.println("Stage 2");
 
             Elements elements = olxConnection.getHtmlElemnts(olxlink);
+            System.out.println(elements);
+            System.out.println("Stage 3");
+
             for (Element element : elements) {
                 eachResult = element.text();
                 System.out.println(element.ownText());

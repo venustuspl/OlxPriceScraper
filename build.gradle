@@ -29,6 +29,8 @@ dependencies {
 
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '3.5.7'
+
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
