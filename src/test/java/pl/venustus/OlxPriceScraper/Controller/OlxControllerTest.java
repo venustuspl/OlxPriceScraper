@@ -1,15 +1,16 @@
-package pl.venustus.OlxPriceScraper.Service;
+package pl.venustus.OlxPriceScraper.Controller;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import pl.venustus.OlxPriceScraper.Domain.OlxStatistics;
+import pl.venustus.OlxPriceScraper.Service.OlxService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -17,9 +18,15 @@ import java.net.URISyntaxException;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-class OlxServiceTest {
+class OlxControllerTest {
+
+
+    private final OlxController olxController = Mockito.mock(OlxController.class);
+
+    private final OlxService olxService = Mockito.mock(OlxService.class);
 
     private final String olxlink = "https://www.olx.pl";
+
     private final String myHtml = "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" class=\"fixed breakword promoted-list ad_idELwyD\" summary=\"Og�oszenie\" data-id=\"602376167\">\n" +
             "                                            <tbody>\n" +
             "                                            <tr>\n" +
@@ -70,10 +77,7 @@ class OlxServiceTest {
             "                                                    </div> </td>\n" +
             "                                            </tr>\n" +
             "                                            <tr>";
-    @Mock
-    private OlxConnection olxConnection;
-    @InjectMocks
-    private OlxService olxService;
+
 
     @Test
     void getOlxPriceDetails() throws URISyntaxException, IOException {
@@ -84,17 +88,11 @@ class OlxServiceTest {
 
         }
 
+        OlxStatistics olxStatistics = new OlxStatistics(olxlink, 5600.00, 2, 2300.00, 2300.00, 2300.00, 2300.00);
 
-        when(olxConnection.getHtmlElemnts(olxlink)).thenReturn(elements);
+        //when(olxService.getOlxPriceDetails(olxlink)).thenReturn(olxStatistics);
+        when(olxController.getOlxPriceDetails(olxlink)).thenReturn(olxStatistics);
 
-        for (Element element : olxConnection.getHtmlElemnts(olxlink)) {
-            System.out.println(element.text());
-
-        }
-
-
-        OlxStatistics olxStatistics = olxService.getOlxPriceDetails(olxlink);
-        System.out.println(olxStatistics);
-        //assertEquals(olxStatistics.getSum(), 5600);
+        Assert.assertEquals(java.util.Optional.ofNullable(5600.0), java.util.Optional.ofNullable(olxController.getOlxPriceDetails(olxlink).getSum()));
     }
 }
