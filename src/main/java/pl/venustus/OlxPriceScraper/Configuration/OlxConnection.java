@@ -1,4 +1,4 @@
-package pl.venustus.OlxPriceScraper.Service;
+package pl.venustus.OlxPriceScraper.Configuration;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

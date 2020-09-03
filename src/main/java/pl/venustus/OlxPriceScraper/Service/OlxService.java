@@ -4,6 +4,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.venustus.OlxPriceScraper.Configuration.OlxConnection;
 import pl.venustus.OlxPriceScraper.Domain.OlxStatistics;
 
 import java.io.IOException;
