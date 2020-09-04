@@ -8,14 +8,14 @@ function append(parent, el) {
 
 
 function validateurl(url) {
-    var reg = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/);
+    var reg = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
     if (!reg.test(url))
-        return true;
-    else
         return false;
+    else
+        return true;
 }
 function validateemail(email) {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    var reg = new RegExp( '' );
     if(!reg.test(email))
         return false;
     else
@@ -26,9 +26,10 @@ function getolxpriceaverage(){
 const ol = document.getElementById('olxlink').value;
 const opdr = document.getElementById('olxpricedetailsresult');
 const opdr2 = document.getElementById('olxpricedetailsresult2');
+const error = document.getElementById('error');
 
 if (validateurl(ol)){
-
+error.innerHTML = ''
     var querylink = '/getolxpricedetails?olxlink=' + ol;
     console.log(querylink);
 
@@ -37,8 +38,10 @@ fetch(querylink)
     .then(text => opdr.innerHTML = text);
 
 } else {
+error.innerHTML = 'Please put right olx link';
 console.log('blad');
-document.getElementById('olxlink').value.innerHTML = 'Please put right olx link';
+
+
 }
 
 }
