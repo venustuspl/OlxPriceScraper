@@ -37,6 +37,7 @@ public class OlxService {
 //            Elements elements = document.select("p.price");
 //            System.out.println("Stage 2");
 
+            System.out.println("start");
             Elements elements = olxConnection.getHtmlElemnts(olxlink);
             System.out.println(elements);
             System.out.println("Stage 3");
@@ -47,7 +48,7 @@ public class OlxService {
                 eachValue = Double.valueOf(eachResult.substring(0, eachResult.length() - 3).replaceAll(" ", "").replaceAll(",", "."));
                 System.out.println(eachValue);
                 valuesList.add(eachValue);
-
+                System.out.println(element);
             }
             if (!valuesList.isEmpty()) {
                 minValue = valuesList.get(0);

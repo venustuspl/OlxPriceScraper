@@ -9,14 +9,18 @@ import java.io.IOException;
 
 @Service
 public class OlxConnection {
-
+        private Elements elements = new Elements();
     public Elements getHtmlElemnts(String olxlink) throws IOException {
-        Document document = Jsoup.connect(olxlink)
-                .followRedirects(true)
-                .get();
-        //System.out.println(document);
-        Elements elements = document.select("p.price");
 
+        try {
+            Document document = Jsoup.connect(olxlink)
+                    .followRedirects(true)
+                    .get();
+            //System.out.println(document);
+            elements = document.select("p.price");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         return elements;
 
     }
