@@ -11,12 +11,15 @@ import pl.venustus.OlxPriceScraper.Service.OlxService;
 public class OlxController {
 
     @Autowired
-    private OlxService olxService;
+    private final OlxService olxService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/getolxpricedetails")
     public OlxStatistics getOlxPriceDetails(@RequestParam("olxlink") String olxlink) {
         return olxService.getOlxPriceDetails(olxlink);
     }
 
+    public OlxController(OlxService olxService) {
+        this.olxService = olxService;
+    }
 }
 

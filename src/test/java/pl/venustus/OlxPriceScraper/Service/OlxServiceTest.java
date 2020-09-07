@@ -78,10 +78,12 @@ class OlxServiceTest {
 
     @Test
     void shouldGetNotNullOlxStatisticsObjectFromOlxService() throws URISyntaxException, IOException {
-        //System.out.println(olxService.getOlxPriceDetails(olxlink));
+        //Given
         Document doc = Jsoup.parseBodyFragment(myHtml, "https://www.olx.pl");
         Elements elements = doc.select("p.price");
         when(olxConnection.getHtmlElemnts(olxlink)).thenReturn(elements);
+
+        //Then
         Assert.assertNotNull(olxService.getOlxPriceDetails(olxlink));
 
     }
