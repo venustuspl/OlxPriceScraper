@@ -20,7 +20,7 @@ class OlxServiceTest {
     private final String olxlink = "https://www.olx.pl";
 
     @Test
-    void getOlxPriceDetails() throws URISyntaxException, IOException {
+    void shouldGetCorrectOlxobjectFromOlxService() throws URISyntaxException, IOException {
         //Given
         OlxStatistics olxStatistics = new OlxStatistics(olxlink, 5600.00, 2, 2300.00, 2300.00, 2300.00, 2300.00);
 

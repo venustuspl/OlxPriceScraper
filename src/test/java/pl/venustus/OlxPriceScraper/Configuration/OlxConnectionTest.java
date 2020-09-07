@@ -69,7 +69,7 @@ class OlxConnectionTest {
 
 
     @Test
-    void getHtmlElemnts() throws IOException {
+    void shouldGetCorrectAmountOfHtmlElements() throws IOException {
         //Given
         Document doc = Jsoup.parseBodyFragment(myHtml, "https://www.olx.pl");
         Elements elements = doc.select("p.price");
