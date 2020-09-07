@@ -16,6 +16,10 @@ public class OlxService {
     @Autowired
     OlxConnection olxConnection;
 
+    public OlxService(OlxConnection olxConnection) {
+        this.olxConnection = olxConnection;
+    }
+
     public OlxStatistics getOlxPriceDetails(String olxlink) {
         Double eachValue;
         String eachResult;
@@ -73,9 +77,9 @@ public class OlxService {
 
                 Collections.sort(valuesList);
                 if (loop % 2 == 0) {
-                    median = ((valuesList.get(Integer.valueOf(loop / 2)) + valuesList.get(Integer.valueOf(loop / 2) + 1)) / 2);
+                    median = ((valuesList.get(Integer.valueOf(loop / 2) - 1) + valuesList.get(Integer.valueOf(loop / 2))) / 2);
                 } else {
-                    median = valuesList.get(Integer.valueOf(loop / 2) + 1);
+                    median = valuesList.get(Integer.valueOf(loop / 2));
                 }
 
             }
