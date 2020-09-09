@@ -6,7 +6,6 @@ function append(parent, el) {
     return parent.appendChild(el); // Append the second parameter(element) to the first one
 }
 
-
 function validateurl(url) {
     var reg = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
     if (!reg.test(url))

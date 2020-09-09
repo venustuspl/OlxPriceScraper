@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OlxPriceScraperApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(OlxPriceScraperApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(OlxPriceScraperApplication.class, args);
+    }
 
 }
